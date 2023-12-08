@@ -1,0 +1,47 @@
+:root {
+    --sq-side: 20px;
+}
+
+@font-face {
+    font-family: 'FontName';
+    src: url('FileName.eot');
+    font-weight: normal;
+}
+
+body {
+    max-width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    background: #0b1d26;
+}
+
+table {
+    border-spacing: 3px;
+}
+
+td {
+    width: var(--sq-side);
+    height: var(--sq-side);
+    margin: 0;
+    padding: 0;
+}
+
+td input {
+    width: var(--sq-side);
+    height: var(--sq-side);
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    background-color: rgba(211, 212, 210, 0.26);
+    border: 0.2px solid rgba(245, 245, 245, 0.443);
+    border-radius: 1.5px;
+
+    font-size: 18px;
+    color: wheat;
+    text-align: center;
+    
+}
