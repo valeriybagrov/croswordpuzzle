@@ -45,3 +45,19 @@ td input {
     text-align: center;
     
 }
+
+td div {
+    width: var(--sq-side);
+    height: var(--sq-side);
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    background-color: rgba(211, 212, 210, 0.26);
+    border: 0.2px solid rgba(245, 245, 245, 0.443);
+    border-radius: 1.5px;
+
+    font-size: 18px;
+    color: wheat;
+    text-align: center; 
+    vertical-align: baseline; 
+}
