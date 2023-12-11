@@ -1,5 +1,7 @@
 :root {
     --sq-side: 20px;
+    --border-color: rgba(245, 245, 245, 0.443);
+    --background-cell: rgba(211, 212, 210, 0.26);
 }
 
 @font-face {
@@ -17,6 +19,8 @@ body {
     margin: 0;
     padding: 0;
     background: #0b1d26;
+    font-size: var(--sq-side);
+    line-height: 0;
 }
 
 table {
@@ -36,14 +40,13 @@ td input {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    background-color: rgba(211, 212, 210, 0.26);
-    border: 0.2px solid rgba(245, 245, 245, 0.443);
+    background-color: var(--background-cell);
+    border: 0.2px solid var(--border-color);
     border-radius: 1.5px;
 
-    font-size: 18px;
+    font-size: 1rem;
     color: wheat;
     text-align: center;
-    
 }
 
 td div {
@@ -52,12 +55,34 @@ td div {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    background-color: rgba(211, 212, 210, 0.26);
-    border: 0.2px solid rgba(245, 245, 245, 0.443);
+    background-color: var(--background-cell);
+    border: 0.2px solid var(--border-color);
     border-radius: 1.5px;
 
-    font-size: 18px;
+    font-size: 1rem;
     color: wheat;
+    line-height: normal;
     text-align: center; 
     vertical-align: baseline; 
+}
+
+.sh-h-answers {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 120px;
+    height: 40px;
+    border: 1px solid var(--border-color);
+    background-color: olive;
+    border-radius: 15px;
+    text-decoration: none;
+    color: white;
+    font-size: 1rem;
+    box-shadow: 0 0 16px 1px red;
+    margin: 20px 0;
+}
+
+.sh-h-answers:active {
+    scale: 0.94;
+    box-shadow: 0 0 10px 0.5px red;
 }
