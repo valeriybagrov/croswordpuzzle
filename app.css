@@ -1,13 +1,29 @@
 :root {
-    --sq-side: 20px;
+    --viewwidth: 1vw;
+    --sq-side: calc(var(--viewwidth)*1.7);
     --border-color: rgba(245, 245, 245, 0.443);
     --background-cell: rgba(211, 212, 210, 0.26);
 }
 
 @font-face {
-    font-family: 'FontName';
-    src: url('FileName.eot');
+    font-family: "Rubic";
+    src: url('assets/fonts/Rubik-SemiBold.ttf');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Rubic";
+    src: url('assets/fonts/Rubik-MediumItalic.ttf');
+    font-weight: medium;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Rubic";
+    src: url('assets/fonts/Rubik-Regular.ttf');
     font-weight: normal;
+    font-style: normal;
 }
 
 body {
@@ -15,16 +31,38 @@ body {
     height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center;
     margin: 0;
     padding: 0;
     background: #0b1d26;
+
+    counter-reset: my-counter;
+
+    font-family: "Rubic";
+    font-weight: 600;
+    font-style: normal;
     font-size: var(--sq-side);
     line-height: 0;
 }
 
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    border: 0;
+}
+
+.left-side {
+    position: absolute;
+    left: calc(var(--sq-side)*0.5);
+    top: calc(var(--sq-side)*0.71);
+}
+
 table {
-    border-spacing: 3px;
+    border-spacing: calc(var(--viewwidth)*0.16);
 }
 
 td {
@@ -66,10 +104,75 @@ td div {
     vertical-align: baseline; 
 }
 
+.down-face,
+.across-face {
+    position: absolute;
+    right: 0;
+    padding: calc(var(--viewwidth)*4) calc(var(--viewwidth)*5);
+    text-align: center;
+    vertical-align: middle;
+    background: aqua;
+}
+
+.down-face {
+    top: 0;
+    border-radius: 0 0 0 20px;
+}
+
+.across-face {
+    bottom: 0;
+    border-radius: 20px 0 0 0;
+}
+
+[id^="number"] {
+    position: relative;
+}
+    
+[id^="number"]::before {
+    position: absolute;
+    top: calc(var(--sq-side)*0.3);
+    left: calc(var(--sq-side)*0.03);
+    counter-increment: my-counter;
+    color: orange;
+    font-size: calc(var(--sq-side)*0.55);
+    content: counter(my-counter);
+    opacity: 0.6;
+    z-index: -100;
+}
+
+
+.questions-across,
+.questions-down {
+    font-size: 0;
+}
+#down:checked ~ .questions-down,
+#across:checked ~ .questions-across {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: calc(var(--sq-side)*28);
+    background-color: white;
+
+
+    vertical-align: middle;
+    text-align: justify;
+    padding: 5px 20px;
+    
+    font-size: 18px;
+    font-weight: normal;
+    line-height: 1;
+
+    overflow-y: scroll;
+    z-index: -100;
+}
+
+
+
 .sh-h-answers {
     display: flex;
     justify-content: center;
     align-items: center;
+    align-self: flex-end;
     width: 120px;
     height: 40px;
     border: 1px solid var(--border-color);
@@ -79,7 +182,7 @@ td div {
     color: white;
     font-size: 1rem;
     box-shadow: 0 0 16px 1px red;
-    margin: 20px 0;
+    margin: 20px;
 }
 
 .sh-h-answers:active {
