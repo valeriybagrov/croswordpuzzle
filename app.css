@@ -1,6 +1,5 @@
 :root {
-    --viewwidth: 1vw;
-    --sq-side: calc(var(--viewwidth)*1.7);
+    --sq-side: 1.7vw;
     --border-color: rgba(245, 245, 245, 0.443);
     --background-cell: rgba(211, 212, 210, 0.26);
 }
@@ -26,6 +25,11 @@
     font-style: normal;
 }
 
+@keyframes appear {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+  }
+
 body {
     max-width: 100vw;
     height: 100vh;
@@ -35,7 +39,7 @@ body {
     padding: 0;
     background: #0b1d26;
 
-    counter-reset: my-counter;
+    counter-reset: cell-counter;
 
     font-family: "Rubic";
     font-weight: 600;
@@ -62,7 +66,7 @@ body {
 }
 
 table {
-    border-spacing: calc(var(--viewwidth)*0.16);
+    border-spacing: 0.16vw;
 }
 
 td {
@@ -106,22 +110,26 @@ td div {
 
 .down-face,
 .across-face {
+    display: block;
     position: absolute;
     right: 0;
-    padding: calc(var(--viewwidth)*4) calc(var(--viewwidth)*5);
+    padding: 0 1.2vw 0 2.5vw;
     text-align: center;
-    vertical-align: middle;
     background: aqua;
 }
 
 .down-face {
     top: 0;
-    border-radius: 0 0 0 20px;
+    border-radius: 0 0 0 5vw;
+    padding-top: 3vw;
+    padding-bottom: 4vw;
 }
 
 .across-face {
     bottom: 0;
-    border-radius: 20px 0 0 0;
+    border-radius: 5vw 0 0 0;
+    padding-bottom: 3vw;
+    padding-top: 4vw;
 }
 
 [id^="number"] {
@@ -132,57 +140,93 @@ td div {
     position: absolute;
     top: calc(var(--sq-side)*0.3);
     left: calc(var(--sq-side)*0.03);
-    counter-increment: my-counter;
+    counter-increment: cell-counter;
     color: orange;
     font-size: calc(var(--sq-side)*0.55);
-    content: counter(my-counter);
+    content: counter(cell-counter);
     opacity: 0.6;
     z-index: -100;
 }
-
 
 .questions-across,
 .questions-down {
     font-size: 0;
 }
+
 #down:checked ~ .questions-down,
 #across:checked ~ .questions-across {
     position: absolute;
     top: 0;
     bottom: 0;
-    left: calc(var(--sq-side)*28);
+    right: 0;
+    left: 46vw;
     background-color: white;
 
 
     vertical-align: middle;
     text-align: justify;
-    padding: 5px 20px;
-    
-    font-size: 18px;
+    padding: 1.6vw 3.5vw;
+
+    font-size: 1.6vw;
     font-weight: normal;
-    line-height: 1;
+    line-height: 1.15;
+    transition: 0.4s;
 
     overflow-y: scroll;
-    z-index: -100;
+    z-index: 2;
 }
 
+#down:checked + .down-face,
+#across:checked + .across-face {
+    visibility: hidden;
+}
 
+#down:checked + .down-face::before,
+#across:checked + .across-face::before {
+    position: absolute;
+    right: 1.9vw;
+    visibility: visible;
+
+    padding: 1.2vw 0.8vw;
+    background: red;
+
+    content: "X";
+
+    animation: appear 2s forwards;
+
+    z-index: 3;
+}
+
+#down:checked + .down-face::before {
+    top: 0.5vw;
+}
+
+#across:checked + .across-face::before {
+    bottom: 0.5vw;
+}
 
 .sh-h-answers {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    align-self: flex-end;
-    width: 120px;
-    height: 40px;
+    position: absolute;
+    bottom: 1vw;
+    left: 50vw;
+    display: block;
+    width: 11vw;
+    height: 3vw;
     border: 1px solid var(--border-color);
-    background-color: olive;
+    background-color: var(--background-cell);
     border-radius: 15px;
-    text-decoration: none;
-    color: white;
-    font-size: 1rem;
     box-shadow: 0 0 16px 1px red;
-    margin: 20px;
+
+    text-decoration: none;
+    text-align: center;
+}
+
+.sh-h-answers p {
+    color: white;
+    line-height: 0;
+    font-weight: bold;
+    font-size: 1.2vw;
+    padding-top: 0.2vw;
 }
 
 .sh-h-answers:active {
