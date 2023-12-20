@@ -96,17 +96,18 @@ td div {
     width: var(--sq-side);
     height: var(--sq-side);
     box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 0;
     margin: 0;
     background-color: var(--background-cell);
     border: 0.2px solid var(--border-color);
     border-radius: 1.5px;
 
-    font-size: 1rem;
     color: var(--text-color);
-    line-height: normal;
-    text-align: center; 
-    vertical-align: baseline; 
+    font-weight: 600;
+    font-size: 1.4vw;
 }
 
 .down-face,
@@ -207,10 +208,10 @@ td div {
 #down:checked + .down-face::before,
 #across:checked + .across-face::before {
     position: absolute;
-    right: 1.5vw;
+    right: 1.2vw;
     visibility: visible;
 
-    padding: 0.2vh 0.6vw;
+    padding: 0.2vh 0.3vw;
     color: red;
 
     content: "✖";
