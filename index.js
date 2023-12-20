@@ -1,37 +1,89 @@
-function moveToNext(input) {
-  var currentLength = input.value.length;
+document.addEventListener('keydown', function(event) {
+    const activeElement = document.activeElement;
 
-  if (currentLength >= 1) {
-      var nextInput = input.parentElement.nextElementSibling.querySelector('input');
-      nextInput.focus();
-  } 
+    if (event.key === 'ArrowUp') {
+        const cell = activeElement.parentElement;
+        const prevRow = cell.parentElement.previousElementSibling;
+        if (prevRow) {
+            const targetCell = prevRow.children[cell.cellIndex];
+            const input = targetCell.querySelector('input');
+            if (input) {
+                input.focus();
+            }
+        }
+    } else if (event.key === 'ArrowDown') {
+        const cell = activeElement.parentElement;
+        const nextRow = cell.parentElement.nextElementSibling;
+        if (nextRow) {
+            const targetCell = nextRow.children[cell.cellIndex];
+            const input = targetCell.querySelector('input');
+            if (input) {
+                input.focus();
+            }
+        }
+    } else if (event.key === 'ArrowLeft') {
+        const cell = activeElement.parentElement;
+        const prevCell = cell.previousElementSibling;
+        if (prevCell) {
+            const input = prevCell.querySelector('input');
+            if (input) {
+                input.focus();
+            }
+        }
+    } else if (event.key === 'ArrowRight') {
+        const cell = activeElement.parentElement;
+        const nextCell = cell.nextElementSibling;
+        if (nextCell) {
+            const input = nextCell.querySelector('input');
+            if (input) {
+                input.focus();
+            }
+        }
+    }
+});
+
+function moveAcross(input) {
+    var currentLength = input.value.length;
+  
+    if (currentLength >= 1) {
+        var nextCell = input.parentElement.nextElementSibling;
+        if (nextCell !== null && nextCell.querySelector('input') !== null) {
+            var nextInput = nextCell.querySelector('input');
+            nextInput.focus();
+        } else {
+            input.blur();
+        }
+    }
 };
 
 function checkCase(input) {
-  input.value = input.value.toUpperCase()
+    input.value = input.value.toUpperCase();
 };
 
 function checkAnswer(input) {
-  if (input.value === input.placeholder.toUpperCase()) {
-      input.style.color = '#00FF00';
-  }
+    if (input.value === input.placeholder.toUpperCase()) {
+        input.style.color = '#3ddc3d';
+    } else {
+        input.style.color = '';
+    }
 };
-
-function aplyAllFunc(input) {
-  moveToNext(input);
-  checkCase(input);
-  checkAnswer(input);
+  
+function applyAllFunc(input) {
+    moveAcross(input)
+    checkCase(input);
+    checkAnswer(input);
 };
 
 function applyPropertiesToInputs() {
-  var inputs = document.querySelectorAll('input');
+    var inputs = document.querySelectorAll('input');
 
-  inputs.forEach(function(input) {
-      input.setAttribute('oninput', 'aplyAllFunc(this)');
-  });
-}
+    inputs.forEach(function(input) {
+        input.addEventListener('input', function() {
+            applyAllFunc(input);
+        });
+    });
+};
 
-// Вызываем функцию после загрузки документа
 document.addEventListener('DOMContentLoaded', function() {
-    applyPropertiesToInputs(); // Применяем свойства ко всем input'ам
+    applyPropertiesToInputs();
 });

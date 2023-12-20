@@ -2,6 +2,7 @@
     --sq-side: 1.7vw;
     --border-color: rgba(245, 245, 245, 0.443);
     --background-cell: rgba(211, 212, 210, 0.26);
+    --text-color: rgb(240, 230, 211);
 }
 
 @font-face {
@@ -37,7 +38,7 @@ body {
     justify-content: center;
     margin: 0;
     padding: 0;
-    background: #0b1d26;
+    background: repeating-linear-gradient(#0b1d26, #0d2029);
 
     counter-reset: cell-counter;
 
@@ -55,13 +56,12 @@ body {
     padding: 0;
     margin: -1px;
     overflow: hidden;
-    clip: rect(0,0,0,0);
     border: 0;
 }
 
 .left-side {
     position: absolute;
-    left: calc(var(--sq-side)*0.5);
+    left: var(--sq-side);
     top: calc(var(--sq-side)*0.71);
 }
 
@@ -87,7 +87,8 @@ td input {
     border-radius: 1.5px;
 
     font-size: 1rem;
-    color: wheat;
+    font-weight: 600;
+    color: var(--text-color);
     text-align: center;
 }
 
@@ -102,34 +103,41 @@ td div {
     border-radius: 1.5px;
 
     font-size: 1rem;
-    color: wheat;
+    color: var(--text-color);
     line-height: normal;
     text-align: center; 
     vertical-align: baseline; 
 }
 
 .down-face,
-.across-face {
-    display: block;
+.across-face,
+.sh-h-answers {
     position: absolute;
     right: 0;
-    padding: 0 1.2vw 0 2.5vw;
-    text-align: center;
-    background: aqua;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 23.5vw;
+    height: 17vh;
+    background: var(--background-cell);
+    border-left: 0.4px solid var(--border-color);
+
+    line-height: normal;
+    color: var(--text-color);
 }
 
 .down-face {
     top: 0;
     border-radius: 0 0 0 5vw;
-    padding-top: 3vw;
-    padding-bottom: 4vw;
+    border-bottom: 0.4px solid var(--border-color);
+    padding-bottom: 0.5vh;
 }
 
 .across-face {
     bottom: 0;
     border-radius: 5vw 0 0 0;
-    padding-bottom: 3vw;
-    padding-top: 4vw;
+    border-top: 0.4px solid var(--border-color);
+    padding-top: 0.5vh;
 }
 
 [id^="number"] {
@@ -142,10 +150,9 @@ td div {
     left: calc(var(--sq-side)*0.03);
     counter-increment: cell-counter;
     color: orange;
-    font-size: calc(var(--sq-side)*0.55);
+    font-size: calc(var(--sq-side)*0.45);
     content: counter(cell-counter);
-    opacity: 0.6;
-    z-index: -100;
+    opacity: 0.9;
 }
 
 .questions-across,
@@ -160,7 +167,7 @@ td div {
     bottom: 0;
     right: 0;
     left: 46vw;
-    background-color: white;
+    background: repeating-linear-gradient(130deg, #082430, #06202b, #041a23);
 
 
     vertical-align: middle;
@@ -169,11 +176,27 @@ td div {
 
     font-size: 1.6vw;
     font-weight: normal;
+    color: var(--text-color);
     line-height: 1.15;
     transition: 0.4s;
 
     overflow-y: scroll;
     z-index: 2;
+}
+
+.questions-down::-webkit-scrollbar,
+.questions-across::-webkit-scrollbar {
+    width: 0.6vw;
+    height: 12px;
+  }
+.questions-down::-webkit-scrollbar-track,
+.questions-across::-webkit-scrollbar {
+    background: var(--background-cell);
+}
+.questions-down::-webkit-scrollbar-thumb,
+.questions-across::-webkit-scrollbar-thumb {
+    background-color: var(--text-color);
+    border-radius: 1vw;
 }
 
 #down:checked + .down-face,
@@ -184,13 +207,14 @@ td div {
 #down:checked + .down-face::before,
 #across:checked + .across-face::before {
     position: absolute;
-    right: 1.9vw;
+    right: 1.5vw;
     visibility: visible;
 
-    padding: 1.2vw 0.8vw;
-    background: red;
+    padding: 0.2vh 0.6vw;
+    color: red;
 
-    content: "X";
+    content: "✖";
+    font-size: 2rem;
 
     animation: appear 2s forwards;
 
@@ -198,38 +222,20 @@ td div {
 }
 
 #down:checked + .down-face::before {
-    top: 0.5vw;
+    top: 0.3vh;
 }
 
 #across:checked + .across-face::before {
-    bottom: 0.5vw;
+    bottom: 0.3vh;
+}
+
+input::placeholder {
+    opacity: 0;
 }
 
 .sh-h-answers {
-    position: absolute;
-    bottom: 1vw;
-    left: 50vw;
-    display: block;
-    width: 11vw;
-    height: 3vw;
-    border: 1px solid var(--border-color);
-    background-color: var(--background-cell);
-    border-radius: 15px;
-    box-shadow: 0 0 16px 1px red;
-
+    top: 43vh;
     text-decoration: none;
-    text-align: center;
-}
-
-.sh-h-answers p {
-    color: white;
-    line-height: 0;
-    font-weight: bold;
-    font-size: 1.2vw;
-    padding-top: 0.2vw;
-}
-
-.sh-h-answers:active {
-    scale: 0.94;
-    box-shadow: 0 0 10px 0.5px red;
+    border-radius: 5vw 0 0 5vw;
+    border: 0.4px solid var(--border-color);
 }
